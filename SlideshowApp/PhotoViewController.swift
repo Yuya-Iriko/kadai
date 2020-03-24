@@ -9,14 +9,26 @@
 import UIKit
 
 class PhotoViewController: UIViewController {
-
+    
+    var photo: UIImage?
+    
+    @IBOutlet weak var image: UIImageView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print("Test")
+        self.image?.image = photo
         // Do any additional setup after loading the view.
     }
-    
 
+    @IBAction func backButton(_ sender: Any) {
+        let preVC = self.presentingViewController as! ViewController
+        preVC.imageView.image = self.photo
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     /*
     // MARK: - Navigation
 

@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dIA-oq-oOS">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dIA-oq-oOS">
                                 <rect key="frame" x="10" y="54" width="394" height="400"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="x5v-Xi-464"/>
@@ -31,7 +31,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i58-r3-06R">
                                 <rect key="frame" x="342.5" y="554" width="61.5" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="再生/停止"/>
+                                <state key="normal" title="再生"/>
                                 <connections>
                                     <action selector="switchTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AHa-86-MZg"/>
                                 </connections>
@@ -68,6 +68,7 @@
                         <outlet property="imageView" destination="dIA-oq-oOS" id="4P2-Z3-kun"/>
                         <outlet property="nextButton" destination="iW8-qL-eaQ" id="dOV-4F-6D7"/>
                         <outlet property="switchButton" destination="i58-r3-06R" id="7gR-8L-xlN"/>
+                        <segue destination="XVY-Tk-XFr" kind="show" identifier="segue" id="gtg-PM-jiK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -77,17 +78,43 @@
         <!--Photo View Controller-->
         <scene sceneID="nHr-pG-WUN">
             <objects>
-                <viewController id="XVY-Tk-XFr" customClass="PhotoViewController" customModule="SlideshowApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="photoViewer" modalPresentationStyle="fullScreen" id="XVY-Tk-XFr" customClass="PhotoViewController" customModule="SlideshowApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HqE-RJ-1x0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pGg-D5-neK">
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0G8-ht-2gr">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <state key="normal" title="戻る"/>
+                                <connections>
+                                    <action selector="backButton:" destination="XVY-Tk-XFr" eventType="touchUpInside" id="WR3-tF-IW5"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="pGg-D5-neK" firstAttribute="trailing" secondItem="jaH-BA-mwa" secondAttribute="trailing" id="AXI-6H-3Fy"/>
+                            <constraint firstItem="jaH-BA-mwa" firstAttribute="trailing" secondItem="0G8-ht-2gr" secondAttribute="trailing" id="UID-3R-IPt"/>
+                            <constraint firstItem="0G8-ht-2gr" firstAttribute="top" secondItem="pGg-D5-neK" secondAttribute="bottom" id="WU0-QP-b8g"/>
+                            <constraint firstItem="jaH-BA-mwa" firstAttribute="bottom" secondItem="pGg-D5-neK" secondAttribute="bottom" constant="50" id="XWI-6e-xJd"/>
+                            <constraint firstItem="0G8-ht-2gr" firstAttribute="leading" secondItem="jaH-BA-mwa" secondAttribute="leading" id="b13-oL-85P"/>
+                            <constraint firstItem="pGg-D5-neK" firstAttribute="leading" secondItem="jaH-BA-mwa" secondAttribute="leading" id="bxg-lT-FeO"/>
+                            <constraint firstItem="jaH-BA-mwa" firstAttribute="bottom" secondItem="0G8-ht-2gr" secondAttribute="bottom" id="ina-di-YUM"/>
+                            <constraint firstItem="pGg-D5-neK" firstAttribute="top" secondItem="jaH-BA-mwa" secondAttribute="top" id="qC3-8u-uKe"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="jaH-BA-mwa"/>
                     </view>
+                    <navigationItem key="navigationItem" id="nl5-LO-2ip"/>
+                    <connections>
+                        <outlet property="image" destination="pGg-D5-neK" id="wMF-D2-xke"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GJs-xQ-peb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1061" y="139"/>
+            <point key="canvasLocation" x="1060.8695652173915" y="138.61607142857142"/>
         </scene>
     </scenes>
 </document>

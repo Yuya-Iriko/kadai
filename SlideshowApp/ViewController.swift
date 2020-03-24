@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     
     var selectNumber = 0
     
+    var timer : Timer!
+    
     func displayPhoto(){
         
         let name = imageArray[selectNumber]
@@ -33,9 +35,28 @@ class ViewController: UIViewController {
         
         let image = UIImage(named: "photo0")
         imageView.image = image
+        
+        let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapImage))
+        self.imageView.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
     }
+    
+    override func unwind(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segue"{
+            
+            let nextVC = segue.destination as! PhotoViewController
+            nextVC.photo = imageView.image
+        }
+    }
 
+    @objc func tapImage(){
+        performSegue(withIdentifier: "segue" , sender: nil)
+
+    }
+    
     @IBAction func nextTap(_ sender: Any) {
         if selectNumber < imageArray.count - 1 {
             selectNumber += 1
@@ -57,7 +78,35 @@ class ViewController: UIViewController {
         
     }
     
+    
     @IBAction func switchTap(_ sender: Any) {
+        if timer == nil{
+            self.nextButton.isEnabled = false
+            self.backButton.isEnabled = false
+            
+            self.switchButton.setTitle("停止", for: .normal)
+            
+            self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(slideShowTimer(_:)), userInfo: nil, repeats: true)
+            
+        } else {
+            self.nextButton.isEnabled = true
+            self.backButton.isEnabled = true
+            
+            self.switchButton.setTitle("再生", for: .normal)
+            
+            self.timer.invalidate()
+            self.timer = nil
+        }
+    }
+    
+    @objc func slideShowTimer(_ timer: Timer){
+        if selectNumber < imageArray.count - 1 {
+            selectNumber += 1
+            displayPhoto()
+        } else {
+            selectNumber = 0
+            displayPhoto()
+        }
     }
     
     
