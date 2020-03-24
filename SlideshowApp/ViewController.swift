@@ -41,8 +41,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func unwind(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segue"{
@@ -53,7 +51,20 @@ class ViewController: UIViewController {
     }
 
     @objc func tapImage(){
+        
         performSegue(withIdentifier: "segue" , sender: nil)
+        
+        if timer != nil{
+            self.timer.invalidate()
+            self.timer = nil
+            
+            self.nextButton.isEnabled = true
+            self.backButton.isEnabled = true
+            
+            self.switchButton.setTitle("再生", for: .normal)
+            
+        }
+       
 
     }
     

@@ -23,6 +23,7 @@ class PhotoViewController: UIViewController {
     @IBAction func backButton(_ sender: Any) {
         let preVC = self.presentingViewController as! ViewController
         preVC.imageView.image = self.photo
+        
         self.dismiss(animated: true, completion: nil)
     }
     
